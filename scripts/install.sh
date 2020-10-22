@@ -93,11 +93,11 @@ function install_dependencies(){
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         #sudo -u $SUDO_USER removes brew's error message that brew should not be run as 'sudo'
         type -a brew 2>&1 || ( echo "ERROR: brew is required to install packages." >&2 && return 1 )
-        sudo -u $SUDO_USER brew install node
-        sudo -u $SUDO_USER brew install python
-        sudo -u $SUDO_USER brew install yarn
-        sudo pip3 install boto3
-        sudo npm install -g serverless
+        brew install node
+        brew install python
+        brew install yarn
+        pip3 install --user boto3
+        npm install -g serverless
     else
         echo "ERROR: this install script is only supported on Linux or OSX."
         return 1
@@ -185,15 +185,10 @@ cd "${0%/*}"
 # Save parent directory
 export PACKAGE_ROOT=${PWD%/*}
 
-if [ "$DOCKER" != "true" -a "$EUID" -ne 0 ]
-then
-    echo "Error: installation requires elevated permissions. Please run as root using the 'sudo' command." >&2
-    exit 1
-fi
 
 #Default values
 stage="dev"
-region="us-west-2"
+region="eu-west-2"
 
 #Parse commandline args
 while [ "$1" != "" ]; do
