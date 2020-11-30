@@ -90,11 +90,11 @@ Resources:
         VolumeType: gp2
         VolumeSize: !If [isDev, 10, 73]
       ElasticsearchClusterConfig:
-        InstanceType: !If [isDev, t3.medium.elasticsearch, m5.large.elasticsearch]
+        InstanceType: !If [isDev, t2.small.elasticsearch, t3.small.elasticsearch]
         InstanceCount: !If [isDev, 1, 4]
         DedicatedMasterEnabled: !If [isDev, false, true]
         DedicatedMasterCount: !If [isDev, !Ref 'AWS::NoValue', 3]
-        DedicatedMasterType: !If [isDev, !Ref 'AWS::NoValue', c5.large.elasticsearch]
+        DedicatedMasterType: !If [isDev, !Ref 'AWS::NoValue', t3.small.elasticsearch]
         ZoneAwarenessEnabled: !If [isDev, false, true]
       ElasticsearchVersion: 7.4
       EncryptionAtRestOptions:
